@@ -23,18 +23,18 @@ if(strlen($_GET['a']) > 3 && strlen($_GET['z']) > 3) {
  */
 function get_whois_data(string $test_server,string  $test_domain)
 {
-	$msg = [];
-	$connection = fsockopen($test_server, 43, $errno, $errstr, 10);
-	if (!$connection) {
-		return "Can't connect to the server!";
-	}
-	sleep(2);
-	fwrite($connection, $test_domain."\r\n");
-	while (!feof($connection)) {
-		$msg[] = fgets($connection, 4096);
-	}
-	fclose($connection);
-	return $msg;
+    $msg = [];
+    $connection = fsockopen($test_server, 43, $errno, $errstr, 10);
+    if ( !$connection ) {
+        return "Can't connect to the server!";
+    }
+    sleep(2);
+    fwrite($connection, $test_domain . "\r\n");
+    while (!feof($connection)) {
+        $msg[] = fgets($connection, 4096);
+    }
+    fclose($connection);
+    return $msg;
 }
 
 
@@ -45,17 +45,17 @@ function get_whois_data(string $test_server,string  $test_domain)
  */
 function excelColumnRange(string $lower,string  $upper)
 {
-    ++$upper;
-    for ($i = $lower; $i !== $upper; ++$i) {
+    ++ $upper;
+    for ($i = $lower; $i !== $upper; ++ $i) {
         yield $i;
     }
 }
 
 
 foreach (excelColumnRange($_GET['a'], $_GET['z']) as $value) {
-    $domen = $value.'.rs';
-	$test = get_whois_data('whois.rnids.rs', $domen);
-	if($test[0] === '%ERROR:103: Domain is not registered' ){
-	    echo $domen. '-Slobodan<br>';
-	}
+    $domen = $value . '.rs';
+    $test = get_whois_data('whois.rnids.rs', $domen);
+    if ( $test[ 0 ] === '%ERROR:103: Domain is not registered' ) {
+        echo $domen . ' -Slobodan<br>';
+    }
 }
