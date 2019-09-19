@@ -1,13 +1,13 @@
 <?php
 set_time_limit(120);
 function get_whois_data($test_server, $test_domain) {
-	$msg = "";
+	$msg = [];
 	$connection = fsockopen($test_server, 43, $errno, $errstr, 10);
 	if (!$connection) {
 		$msg = "Can't connect to the server!";
 	} else {
 		sleep(2);
-		fputs($connection, $test_domain."\r\n");
+		fwrite($connection, $test_domain."\r\n");
 		while (!feof($connection)) {
 			$msg[] = fgets($connection, 4096);
 		}
@@ -21,14 +21,14 @@ function excelColumnRange($lower, $upper) {
         yield $i;
     }
 }
-if(isset($_GET['a']) AND isset($_GET['z'])){
-	if(!is_numeric($_GET['a']) AND !is_numeric($_GET['z'])){
-		if(strlen($_GET['a'])<=3 AND strlen($_GET['z'])<=3){
+if(isset($_GET['a'], $_GET['z'])){
+	if(!is_numeric($_GET['a']) && !is_numeric($_GET['z'])){
+		if(strlen($_GET['a'])<=3 && strlen($_GET['z'])<=3){
 			foreach (excelColumnRange($_GET['a'], $_GET['z']) as $value) {
 				$domen = $value.'.rs';
-				$test = get_whois_data("whois.rnids.rs", $domen);
-				if($test[0]=="%ERROR:103: Domain is not registered"){
-					echo $domen."-Slobodan<br>";
+				$test = get_whois_data('whois.rnids.rs', $domen);
+				if($test[0] === '%ERROR:103: Domain is not registered' ){
+					echo $domen. '-Slobodan<br>';
 			    }
 			}
 		}else{
