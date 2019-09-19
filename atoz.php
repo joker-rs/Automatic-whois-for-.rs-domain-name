@@ -13,11 +13,11 @@ if(!isset($_GET['a'], $_GET['z'])) {
 }
 
 if(is_numeric($_GET['a']) && is_numeric($_GET['z'])) {
-    echo 'Ukucan je broj u petlji.';
+    echo 'Numbers are not allowed.';
 }
 
 if(strlen($_GET['a']) > 3 && strlen($_GET['z']) > 3) {
-    echo 'Za sada ne mozemo da Vam ponudimo vise od 3 karaktera.';
+    echo 'For now we can only check for a 3 characters not more.';
 }
 
 
