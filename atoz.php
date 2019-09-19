@@ -1,7 +1,24 @@
 <?php
+
+if(!isset($_GET['a'], $_GET['z'])) {
+    echo 'Ako ste ovde, onda znate kako se ovaj program koristi ;)<br>';
+    echo 'Ali ako ne znate kako se koristi ovaj program idite na <a href="https://joker.rs">JOKER.RS</a><br>';
+    echo 'If you are here, you know how to use this program ;)<br>';
+    echo 'But if you don\'t know how to use this program, then go to <a href="https://joker.rs">JOKER.RS</a>';
+}
+
+if(is_numeric($_GET['a']) && is_numeric($_GET['z'])) {
+    echo 'Ukucan je broj u petlji.';
+}
+
+if(strlen($_GET['a']) > 3 && strlen($_GET['z']) > 3) {
+    echo 'Za sada ne mozemo da Vam ponudimo vise od 3 karaktera.';
+}
+
+
 /**
- * @param $test_server
- * @param $test_domain
+ * @param string $test_server
+ * @param string $test_domain
  * @return array|string
  */
 function get_whois_data(string $test_server,string  $test_domain)
@@ -20,9 +37,10 @@ function get_whois_data(string $test_server,string  $test_domain)
 	return $msg;
 }
 
+
 /**
- * @param $lower
- * @param $upper
+ * @param string $lower
+ * @param string $upper
  * @return Generator
  */
 function excelColumnRange(string $lower,string  $upper)
@@ -33,19 +51,6 @@ function excelColumnRange(string $lower,string  $upper)
     }
 }
 
-if(!isset($_GET['a'], $_GET['z'])) {
-    echo 'Ako ste ovde, onda znate kako se ovaj program koristi ;)<br>';
-    echo 'Ali ako ne znate kako se koristi ovaj program idite na <a href="https://joker.rs">JOKER.RS</a><br>';
-    echo 'If you are here, you know how to use this program ;)<br>';
-    echo 'But if you don\'t know how to use this program, then go to <a href="https://joker.rs">JOKER.RS</a>';
-}
-
-if(is_numeric($_GET['a']) && is_numeric($_GET['z'])) {
-    echo 'Ukucan je broj u petlji.';
-}
-if(strlen($_GET['a']) > 3 && strlen($_GET['z']) > 3) {
-    echo 'Za sada ne mozemo da Vam ponudimo vise od 3 karaktera.';
-}
 
 foreach (excelColumnRange($_GET['a'], $_GET['z']) as $value) {
     $domen = $value.'.rs';
