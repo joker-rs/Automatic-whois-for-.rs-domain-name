@@ -1,10 +1,15 @@
 <?php
 
 if(!isset($_GET['a'], $_GET['z'])) {
-    echo 'Ako ste ovde, onda znate kako se ovaj program koristi ;)<br>';
-    echo 'Ali ako ne znate kako se koristi ovaj program idite na <a href="https://joker.rs">JOKER.RS</a><br>';
-    echo 'If you are here, you know how to use this program ;)<br>';
-    echo 'But if you don\'t know how to use this program, then go to <a href="https://joker.rs">JOKER.RS</a>';
+    echo '
+    <form method="GET">
+        <label for="a">Insert two letters (from where to start)</label>
+        <input id="a" type="text" name="a"><br />
+        <label for="z">Insert two letters (where to end)</label>
+        <input id="z" type="text" name="z"><br />
+        <button type="submit">Send</button>
+    </form>';
+    die();
 }
 
 if(is_numeric($_GET['a']) && is_numeric($_GET['z'])) {
