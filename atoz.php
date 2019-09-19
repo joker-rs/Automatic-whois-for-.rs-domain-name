@@ -61,6 +61,6 @@ foreach (excelColumnRange($_GET['a'], $_GET['z']) as $value) {
     $domen = $value . '.rs';
     $test = get_whois_data('whois.rnids.rs', $domen);
     if ( $test[ 0 ] === '%ERROR:103: Domain is not registered' ) {
-        echo $domen . ' -Slobodan<br>';
+        echo $domen . ' - is free<br>';
     }
 }
